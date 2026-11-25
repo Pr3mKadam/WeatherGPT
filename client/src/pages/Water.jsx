@@ -137,6 +137,18 @@ export default function Water() {
         <span>{data.dataStatus}</span>
       </div>
 
+      <SourceNote
+        className="page-source-note"
+        sources={[
+          { name: 'Open-Meteo educational content', url: 'https://open-meteo.com/' },
+          { name: 'GloFAS river discharge model', url: 'https://open-meteo.com/en/docs/flood-api' },
+          { name: 'CPCB water quality standards', url: 'https://cpcb.nic.in/' },
+        ]}
+      >
+        {data.disclaimer}
+        {data.samples.label}
+      </SourceNote>
+
       <section className="fact-grid">
         {data.facts.map((fact) => (
           <article className="card fact-card" key={fact.label}>

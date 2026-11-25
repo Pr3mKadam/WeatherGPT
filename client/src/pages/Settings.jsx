@@ -315,20 +315,38 @@ export default function Settings() {
         <div className="status-list">
           <div className="status-row">
             <div>
-              <strong>Weather and air quality</strong>
-              <span>Open-Meteo forecast + CAMS air-quality model</span>
+              <strong>Weather forecast</strong>
+              <span>Open-Meteo model (hourly + daily reanalysis)</span>
             </div>
             <DataBadge status="live" label="Connected" />
           </div>
           <div className="status-row">
             <div>
-              <strong>Database</strong>
-              <span>{db?.label || 'Checking…'}</span>
+              <strong>Air quality</strong>
+              <span>CAMS model (global atmospheric composition forecast)</span>
             </div>
-            <DataBadge
-              status={db?.mode === 'mongodb' ? 'official' : 'estimated'}
-              label={db?.mode === 'mongodb' ? 'MongoDB Atlas' : 'Local JSON fallback'}
-            />
+            <DataBadge status="estimated" label="Modelled" />
+          </div>
+          <div className="status-row">
+            <div>
+              <strong>AQI calculation</strong>
+              <span>CPCB-style breakpoint application (server-side)</span>
+            </div>
+            <DataBadge status="estimated" label="Estimate" />
+          </div>
+          <div className="status-row">
+            <div>
+              <strong>River discharge</strong>
+              <span>GloFAS v4 (Copernicus EMFC — modelled grid cell)</span>
+            </div>
+            <DataBadge status="estimated" label="Modelled" />
+          </div>
+          <div className="status-row">
+            <div>
+              <strong>Climate projection</strong>
+              <span>CMIP6 (MRI_AGCM3_2_S downscaled simulation)</span>
+            </div>
+            <DataBadge status="modelled" label="Modelled" />
           </div>
           <div className="status-row">
             <div>
@@ -342,13 +360,20 @@ export default function Settings() {
           </div>
           <div className="status-row">
             <div>
-              <strong>API base</strong>
-              <span>{origin}/api</span>
+              <strong>Database</strong>
+              <span>{db?.label || 'Checking…'}</span>
             </div>
-            <button type="button" className="btn btn-ghost btn-sm" onClick={() => { health.refresh(); ai.refresh(); }}>
-              <RefreshCw size={13} />
-              Refresh status
-            </button>
+            <DataBadge
+              status={db?.mode === 'mongodb' ? 'official' : 'estimated'}
+              label={db?.mode === 'mongodb' ? 'MongoDB Atlas' : 'Local JSON fallback'}
+            />
+          </div>
+          <div className="status-row">
+            <div>
+              <strong>Monitoring sampler</strong>
+              <span>Records weather + air quality every ${config.monitoring.intervalMinutes} min</span>
+            </div>
+            <DataBadge status="${config.monitoring.enabled ? 'live' : 'paused'}" label="${config.monitoring.enabled ? 'Active' : 'Disabled'}"/>
           </div>
         </div>
 
