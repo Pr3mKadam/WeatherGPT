@@ -3,8 +3,8 @@
     "18.52,73.86": {
       "key": "18.52,73.86",
       "name": "Pune",
-      "admin1": "",
-      "country": "",
+      "admin1": "Maharashtra",
+      "country": "India",
       "lat": 18.5196,
       "lon": 73.8554,
       "points": [
@@ -20,10 +20,36 @@
           "category": "Moderate",
           "pm25": 28.6,
           "pm10": 29.1
+        },
+        {
+          "t": "2026-11-25T19:45",
+          "recordedAt": "2026-11-25T14:28:39.392Z",
+          "temp": 27.4,
+          "humidity": 44,
+          "wind": 5.6,
+          "precip": 0,
+          "condition": "Clear sky",
+          "aqi": 83,
+          "category": "Satisfactory",
+          "pm25": 32.9,
+          "pm10": 33.5
+        },
+        {
+          "t": "2026-11-25T20:30",
+          "recordedAt": "2026-11-25T15:09:17.298Z",
+          "temp": 26.3,
+          "humidity": 50,
+          "wind": 2,
+          "precip": 0,
+          "condition": "Clear sky",
+          "aqi": 64,
+          "category": "Satisfactory",
+          "pm25": 37.7,
+          "pm10": 38.3
         }
       ],
       "createdAt": "2026-11-25T13:07:56.728Z",
-      "lastSampleAt": "2026-11-25T13:14:17.918Z"
+      "lastSampleAt": "2026-11-25T15:09:17.298Z"
     }
   }
 }

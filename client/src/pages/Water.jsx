@@ -92,7 +92,6 @@ const TONE_LABEL = {
 
 export default function Water() {
   const { data, loading, error, refresh } = useApi('/content/water');
-  const [riverIndex, setRiverIndex] = useState(0);
 
   if (loading && !data) {
     return (
@@ -116,8 +115,6 @@ export default function Water() {
     );
   }
 
-  const river = data.samples?.rivers?.[riverIndex] || null;
-
   return (
     <div className="page">
       <PageHeader
@@ -140,54 +137,18 @@ export default function Water() {
       <SourceNote
         className="page-source-note"
         sources={[
-          { name: 'Open-Meteo educational content', url: 'https://open-meteo.com/' },
-          { name: 'GloFAS river discharge model', url: 'https://open-meteo.com/en/docs/flood-api' },
           { name: 'CPCB water quality standards', url: 'https://cpcb.nic.in/' },
+          { name: 'Bureau of Indian Standards (IS 10500)', url: 'https://www.services.bis.gov.in/' },
         ]}
       >
         {data.disclaimer}
-        {data.samples.label}
       </SourceNote>
 
-      <section className="fact-grid">
-        {data.facts.map((fact) => (
-          <article className="card fact-card" key={fact.label}>
-            <strong>{fact.value}</strong>
-            <span className="fact-label">{fact.label}</span>
-            <p>{fact.detail}</p>
-            <small>{fact.source}</small>
-          </article>
-        ))}
-      </section>
-
       <section className="card">
         <div className="card-head">
           <div>
-            <h2 className="card-title">Where water pollution comes from</h2>
-            <p className="card-subtitle">The main sources that degrade rivers, lakes and groundwater</p>
-          </div>
-          <Droplets size={19} aria-hidden="true" />
-        </div>
-        <div className="cause-grid">
-          {data.causes.map((cause) => (
-            <article className="cause-card" key={cause.title}>
-              <span className="cause-icon" aria-hidden="true">
-                <IconFor name={cause.icon} size={17} />
-              </span>
-              <div>
-                <h3>{cause.title}</h3>
-                <p>{cause.detail}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="card">
-        <div className="card-head">
-          <div>
-            <h2 className="card-title">Water-quality indicators</h2>
-            <p className="card-subtitle">What each parameter tells us, and the guideline it is compared with</p>
+            <h2 className="card-title">Water-quality indicators & standards</h2>
+            <p className="card-subtitle">Key parameters, allowable limits and what they measure</p>
           </div>
           <FlaskConical size={19} aria-hidden="true" />
         </div>
@@ -213,102 +174,12 @@ export default function Water() {
         </div>
       </section>
 
-      <section className="card sample-card">
-        <div className="card-head">
-          <div>
-            <h2 className="card-title">Sample river demonstrations</h2>
-            <p className="card-subtitle">Illustrative values for teaching — not real monitoring data</p>
-          </div>
-          <DataBadge status="sample" label={data.samples.label} />
-        </div>
-
-        <div className="sample-tabs" role="tablist" aria-label="Sample rivers">
-          {data.samples.rivers.map((item, index) => (
-            <button
-              key={item.name}
-              type="button"
-              role="tab"
-              aria-selected={index === riverIndex}
-              className={`sample-tab ${index === riverIndex ? 'is-active' : ''}`.trim()}
-              onClick={() => setRiverIndex(index)}
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
-
-        {river && (
-          <>
-            <p className="sample-location">{river.location}</p>
-            <div className="sample-grid">
-              {data.indicators.map((indicator) => {
-                const value = river.values[indicator.key];
-                const verdict = evaluate(indicator, value);
-                return (
-                  <article className={`sample-param ${verdict.tone}`} key={indicator.key}>
-                    <span className="sample-param-label">{indicator.label}</span>
-                    <strong>
-                      {formatNumber(value, indicator.key === 'ph' ? 1 : 0)}
-                      {indicator.unit && <em>{indicator.unit}</em>}
-                    </strong>
-                    <span className="sample-param-verdict">
-                      {verdict.tone === 'good' ? 'Meets' : verdict.tone === 'warn' ? 'Above' : verdict.tone === 'bad' ? 'High' : '—'}
-                    </span>
-                  </article>
-                );
-              })}
-            </div>
-          </>
-        )}
-
-        <div className="sample-disclaimer">
-          <AlertTriangle size={15} aria-hidden="true" />
-          <span>{data.samples.disclaimer}</span>
-        </div>
-      </section>
-
-      <section className="card">
-        <div className="card-head">
-          <div>
-            <h2 className="card-title">What polluted water does</h2>
-            <p className="card-subtitle">Effects on ecosystems, people and the services water provides</p>
-          </div>
-          <Waves size={19} aria-hidden="true" />
-        </div>
-        <div className="effect-grid">
-          <div>
-            <h3>Aquatic life</h3>
-            <ul className="bullet-list">
-              {data.effects.aquatic.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Human health</h3>
-            <ul className="bullet-list">
-              {data.effects.human.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Ecosystems</h3>
-            <ul className="bullet-list">
-              {data.effects.ecosystems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
       <div className="two-col-grid">
         <section className="card">
           <div className="card-head">
             <div>
-              <h2 className="card-title">What you can do</h2>
-              <p className="card-subtitle">Everyday conservation habits</p>
+              <h2 className="card-title">Everyday water conservation</h2>
+              <p className="card-subtitle">Practical steps to reduce consumption</p>
             </div>
             <Droplets size={18} aria-hidden="true" />
           </div>
@@ -330,43 +201,23 @@ export default function Water() {
         <section className="card">
           <div className="card-head">
             <div>
-              <h2 className="card-title">What society can do</h2>
-              <p className="card-subtitle">Prevention at the source</p>
+              <h2 className="card-title">Standards and frameworks</h2>
+              <p className="card-subtitle">The rules that define acceptable water quality in India</p>
             </div>
             <ShieldCheck size={18} aria-hidden="true" />
           </div>
           <div className="action-list">
-            {data.prevention.map((item) => (
-              <div className="action-row" key={item.title}>
-                <span className="action-icon" aria-hidden="true">
-                  <IconFor name={item.icon} size={16} />
-                </span>
+            {data.standards.map((standard) => (
+              <div className="action-row" key={standard.name}>
                 <div>
-                  <strong>{item.title}</strong>
-                  <p>{item.detail}</p>
+                  <strong>{standard.name}</strong>
+                  <p>{standard.detail}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
       </div>
-
-      <section className="card">
-        <div className="card-head">
-          <div>
-            <h2 className="card-title">Standards and frameworks</h2>
-            <p className="card-subtitle">The rules that define acceptable water quality in India</p>
-          </div>
-        </div>
-        <div className="standard-grid">
-          {data.standards.map((standard) => (
-            <article className="standard-card" key={standard.name}>
-              <h3>{standard.name}</h3>
-              <p>{standard.detail}</p>
-            </article>
-          ))}
-        </div>
-      </section>
 
       <SourceNote
         className="page-source-note"

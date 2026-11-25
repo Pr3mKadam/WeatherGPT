@@ -447,27 +447,6 @@ export default function Sustainability() {
         </div>
       </section>
 
-      <section className="card">
-        <div className="card-head">
-          <div>
-            <h2 className="card-title">Where this fits in the SDGs</h2>
-            <p className="card-subtitle">Local actions connect to global goals</p>
-          </div>
-          <Flower2 size={18} aria-hidden="true" />
-        </div>
-        <div className="sdg-grid">
-          {data.sdgs.map((sdg) => (
-            <div className="sdg-card" key={sdg.number}>
-              <span className="sdg-number">{sdg.number}</span>
-              <div>
-                <strong>{sdg.title}</strong>
-                <p>{sdg.detail}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <SourceNote
         className="page-source-note"
         sources={data.references.map((reference) => ({ name: reference.label, url: reference.url }))}

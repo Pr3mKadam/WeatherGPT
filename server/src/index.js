@@ -158,7 +158,7 @@ async function start() {
     console.log(`  → http://localhost:${config.port}/api/health`);
     console.log(`  → database: ${storeInfo().label}`);
     console.log(`  → monitoring: every ${config.monitoring.intervalMinutes} min → server/data/monitor.json`);
-    console.log(`  → AI: ${aiStatus().configured ? `Groq (${aiStatus().model})` : 'offline insight mode (no GROQ_API_KEY)'}`);
+    console.log(`  → AI: ${aiStatus().configured ? `${aiStatus().provider} (${aiStatus().model})` : 'offline insight mode'}`);
     console.log(`  → client build: ${hasClientBuild ? 'served from client/dist' : 'not built (use the Vite dev server)'}`);
     console.log('');
   });

@@ -34,6 +34,15 @@ export const config = {
     process.env.CLIENT_ORIGIN || 'http://localhost:5173,http://127.0.0.1:5173'
   ),
   mongoUri: (process.env.MONGODB_URI || '').trim(),
+  googleApiKey: (process.env.GOOGLE_API_KEY || '').trim(),
+  gemini: {
+    apiKey: (process.env.GEMINI_API_KEY || '').trim(),
+    model: (process.env.GEMINI_MODEL || 'gemini-3.5-flash').trim(),
+    fallbackModels: list(process.env.GEMINI_FALLBACK_MODELS, ['gemini-3.5-flash-lite']),
+    maxTokens: num(process.env.GEMINI_MAX_TOKENS, 900),
+    temperature: num(process.env.GEMINI_TEMPERATURE, 0.4),
+    timeoutMs: num(process.env.GEMINI_TIMEOUT_MS, 30000),
+  },
   groq: {
     apiKey: (process.env.GROQ_API_KEY || '').trim(),
     baseUrl: (process.env.GROQ_BASE_URL || 'https://api.groq.com/openai/v1').replace(/\/$/, ''),

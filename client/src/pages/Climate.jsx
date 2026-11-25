@@ -317,34 +317,7 @@ export default function Climate() {
         }
       />
 
-      <section className="card weather-climate-card">
-        <div className="weather-climate-side">
-          <span className="weather-climate-tag">Weather</span>
-          <h3>{data.weatherVsClimate.weather.title}</h3>
-          <p>{data.weatherVsClimate.weather.definition}</p>
-          <ul className="bullet-list compact">
-            {data.weatherVsClimate.weather.examples.map((example) => (
-              <li key={example}>{example}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="weather-climate-divider" aria-hidden="true" />
-        <div className="weather-climate-side">
-          <span className="weather-climate-tag climate">Climate</span>
-          <h3>{data.weatherVsClimate.climate.title}</h3>
-          <p>{data.weatherVsClimate.climate.definition}</p>
-          <ul className="bullet-list compact">
-            {data.weatherVsClimate.climate.examples.map((example) => (
-              <li key={example}>{example}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <div className="inline-warning">
-        <AlertTriangle size={16} aria-hidden="true" />
-        <span>{data.weatherVsClimate.note}</span>
-      </div>
+      <ProjectionSection />
 
       <section className="fact-grid">
         {data.keyFacts.map((fact) => (
@@ -355,60 +328,6 @@ export default function Climate() {
             <small>{fact.source}</small>
           </article>
         ))}
-      </section>
-
-      <ProjectionSection />
-
-      <section className="card">
-        <div className="card-head">
-          <div>
-            <h2 className="card-title">The greenhouse effect in five steps</h2>
-            <p className="card-subtitle">Why a small change in atmospheric composition matters</p>
-          </div>
-          <Sun size={19} aria-hidden="true" />
-        </div>
-        <ol className="step-list">
-          {data.greenhouseSteps.map((step, index) => (
-            <li key={step}>
-              <span className="step-number">{index + 1}</span>
-              <span>{step}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="card">
-        <div className="card-head">
-          <div>
-            <h2 className="card-title">The main greenhouse gases</h2>
-            <p className="card-subtitle">Different gases, different lifetimes and warming strengths</p>
-          </div>
-        </div>
-        <div className="gas-grid">
-          {data.greenhouseGases.map((gas) => (
-            <article className="gas-card" key={gas.name}>
-              <span className="gas-icon" aria-hidden="true">
-                <IconFor name={gas.icon} size={18} />
-              </span>
-              <h3>{gas.name}</h3>
-              <p className="gas-share">{gas.share}</p>
-              <dl>
-                <div>
-                  <dt>Sources</dt>
-                  <dd>{gas.sources}</dd>
-                </div>
-                <div>
-                  <dt>Warming potential</dt>
-                  <dd>{gas.gwp}</dd>
-                </div>
-                <div>
-                  <dt>Lifetime</dt>
-                  <dd>{gas.lifetime}</dd>
-                </div>
-              </dl>
-            </article>
-          ))}
-        </div>
       </section>
 
       <section className="card">

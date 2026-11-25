@@ -13,9 +13,9 @@ export function ThemeProvider({ children }) {
   const [preference, setPreference] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      return ['light', 'dark', 'system'].includes(stored) ? stored : 'system';
+      return ['light', 'dark', 'system'].includes(stored) ? stored : 'light';
     } catch {
-      return 'system';
+      return 'light';
     }
   });
   const [systemDark, setSystemDark] = useState(systemPrefersDark);
