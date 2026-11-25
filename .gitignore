@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+server/data/store.json
+server/data/*.tmp
+*.log
+.DS_Store
+Thumbs.db
+.vite/
+coverage/
